@@ -1,0 +1,39 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/dji/mavic/protos/Mavic2Pro.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+
+WorldInfo {
+  basicTimeStep 10
+  defaultDamping Damping {
+  }
+}
+Viewpoint {
+  orientation -0.1769870980211591 0.14544819804620981 0.973406589673174 1.461921655357612
+  position -0.23791633606365659 -2.479122968662659 0.9037971081099819
+  follow "Mavic 2 PRO"
+  followType "Mounted Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 100 100
+  appearance Parquetry {
+    type "light strip"
+  }
+}
+DEF SUPERVISOR Robot {
+  locked TRUE
+  controller "supervisor_rpy"
+  supervisor TRUE
+}
+DEF DRONE Mavic2Pro {
+  translation -1.6072792879406883e-06 -1.0217405920744988e-11 0.06569738983167586
+  rotation 2.0006428040554642e-05 -0.999999999799464 -9.025851661067708e-07 0.06976668452511675
+  controller "lab1.rpy_control"
+}

@@ -1,0 +1,42 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/dji/mavic/protos/Mavic2Pro.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/buildings/protos/SmallManor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+
+WorldInfo {
+  basicTimeStep 10
+  defaultDamping Damping {
+  }
+}
+Viewpoint {
+  orientation -0.1685956966994068 0.8747753648632198 0.4542505388911083 0.8025412527669247
+  position -100.55603318510241 -32.60552193890064 62.14808595372993
+  follow "Mavic 2 PRO"
+  followType "Mounted Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 100 100
+  appearance Parquetry {
+    type "light strip"
+  }
+}
+SmallManor {
+}
+DEF SUPERVISOR Robot {
+  locked TRUE
+  controller "supervisor_surveillance"
+  supervisor TRUE
+}
+DEF DRONE Mavic2Pro {
+  translation -40 -1.02174e-11 0.0656974
+  rotation 2.0006428040554642e-05 -0.999999999799464 -9.025851661067708e-07 0.06976668452511675
+  controller "lab3.surveillance"
+}

@@ -1,0 +1,225 @@
+#VRML_SIM R2022a utf8
+# tags: static
+
+PROTO EncoderDisk [
+ field SFVec3f    translation     0 0 0
+ field SFRotation rotation        0 1 0 0
+ field SFVec3f    scale           1 1 1
+ field SFString   name            "encoder disk"
+
+ field SFNode     appearance      NULL
+ field SFNode     physics         NULL
+
+ field SFFloat    radius           0.25
+ field SFFloat    thickness        0.1
+ field SFFloat    innerBeltRadius 0.1
+ field SFFloat    outerBeltRadius 0.2
+ field SFFloat    beltSpace       0.001
+ field MFString   belt            []
+ field MFFloat    beltError       []
+]
+{
+   %{
+      -- Webots does not support table.getn nor sharp operator.
+      local function len(A)
+        local count = 0
+        for _ in pairs(A) do count = count + 1; end
+        return count
+      end
+
+      local radius            = fields.radius.value
+      local thickness         = fields.thickness.value
+      local inner_belt_radius = fields.innerBeltRadius.value
+      local outer_belt_radius = fields.outerBeltRadius.value
+      local belt_space        = fields.beltSpace.value
+      local belt              = fields.belt.value
+      local belt_error        = fields.beltError.value
+
+      local n_belt = len(belt)
+      local n_teeth = string.len(belt[1]) -- n teeth per belt
+
+      local teeth = {}
+      for nth = 0, n_teeth - 1 do
+        teeth[nth] = {}
+        for i = -1, n_belt do
+          teeth[nth][i] = 1
+        end
+
+        for i = 0, n_belt - 1 do
+          teeth[nth][i] = (belt[i + 1]:sub(nth + 1, nth + 1)=="1" and 1) or 0
+        end
+      end
+      teeth[-1] = teeth[n_teeth-1]
+      teeth[n_teeth] = teeth[0]
+
+      local b_error = {}
+      for i = 0, n_belt do b_error[i] = 0 end
+      for k, v in pairs(belt_error) do b_error[k - 1] = v end
+
+      local belt_height = (outer_belt_radius - inner_belt_radius) / n_belt - belt_space
+
+      local points = {}
+
+      local function to_point(nth, n, inner, upper)
+      -- nth   : 0 to n_teeth - 1      : stride n_teeth
+      -- n     : 0 to n_belt           : stride n_belt
+      -- inner : 0 (inner) / 1 (outer) : stride 2
+      -- upper : 0 (upper) / 1 (lower) : stride 2
+
+        nth = math.fmod(nth, n_teeth)
+
+        return (2 * n_belt + 1) * 2 * nth + n * 2 + inner + upper * (2 * n_belt + 1)
+      end
+
+      for nth = 0, n_teeth - 1 do
+        for upper = 0, 1 do
+          for n = 0, n_belt do
+            for inner = 0, 1 do
+              if n == n_belt and inner == 1 then break end
+
+              r = inner_belt_radius + (outer_belt_radius - inner_belt_radius) / n_belt * (n + 0.5) +
+                  (((inner == 0) and -1) or 1) * belt_height / 2
+              if n == n_belt then r = radius end
+
+              th = (nth - 0.5) / n_teeth * 2 * math.pi + b_error[n]
+              points[to_point(nth, n, inner, upper)] =
+                {
+                   x = (((upper == 0) and 1) or -1) * thickness / 2,
+                   y = r * math.sin(th),
+                   z = r * math.cos(th),
+                }
+            end
+          end
+        end
+      end
+
+      local faces = {}
+
+      -- teeth
+      for nth = 0, n_teeth - 1 do
+        -- upper & lower
+        for n = 0, n_belt - 1 do
+          if teeth[nth][n] == 1 then
+            table.insert(faces,
+                         {  to_point(nth,     n, 0, 0),
+                            to_point(nth + 1, n, 0, 0),
+                            to_point(nth + 1, n, 1, 0),
+                            to_point(nth,     n, 1, 0),})
+            table.insert(faces,
+                         {  to_point(nth,     n, 0, 1),
+                            to_point(nth,     n, 1, 1),
+                            to_point(nth + 1, n, 1, 1),
+                            to_point(nth + 1, n, 0, 1),})
+          end
+          if n < n_belt then
+            table.insert(faces,
+                         {  to_point(nth,     n,     1, 0),
+                            to_point(nth + 1, n,     1, 0),
+                            to_point(nth + 1, n + 1, 0, 0),
+                            to_point(nth,     n + 1, 0, 0),})
+            table.insert(faces,
+                         {  to_point(nth,     n,     1, 1),
+                            to_point(nth,     n + 1, 0, 1),
+                            to_point(nth + 1, n + 1, 0, 1),
+                            to_point(nth + 1, n,     1, 1),})
+          end
+        end
+
+        -- inner wall
+        for n = 1, n_belt do
+          table.insert(faces,
+                       {  to_point(nth,     n, 0, 0),
+                          to_point(nth + 1, n, 0, 0),
+                          to_point(nth + 1, n, 0, 1),
+                          to_point(nth,     n, 0, 1),})
+        end
+
+        -- outer wall
+        for n = 0, n_belt - 1 do
+          table.insert(faces,
+                       {  to_point(nth,     n, 1, 0),
+                          to_point(nth,     n, 1, 1),
+                          to_point(nth + 1, n, 1, 1),
+                          to_point(nth + 1, n, 1, 0),})
+        end
+
+        -- left wall
+        for n = 0, n_belt - 1 do
+          if teeth[nth][n] == 0 and teeth[nth + 1][n] == 1 then
+            table.insert(faces,
+                         {  to_point(nth + 1, n, 0, 0),
+                            to_point(nth + 1, n, 1, 0),
+                            to_point(nth + 1, n, 1, 1),
+                            to_point(nth + 1, n, 0, 1),})
+          end
+        end
+
+        -- right wall
+        for n = 0, n_belt - 1 do
+          if teeth[nth][n] == 0 and teeth[nth - 1][n] == 1 then
+            table.insert(faces,
+                         {  to_point(nth, n, 0, 0),
+                            to_point(nth, n, 0, 1),
+                            to_point(nth, n, 1, 1),
+                            to_point(nth, n, 1, 0),})
+          end
+        end
+
+      end
+   }%
+   Solid {
+      translation IS translation
+      rotation IS rotation
+      scale IS scale
+      children [
+         DEF ENCODER_DISK_SHAPE Group {
+            children [
+               Shape {
+                  appearance IS appearance
+                  geometry IndexedFaceSet {
+                     coord Coordinate {
+                        point [
+                         %{ for i = 0, len(points) - 1 do }%
+                         %{=points[i].x}% %{=points[i].y}% %{=points[i].z}%
+                         %{ end }%
+                        ]
+                     }
+                     coordIndex [
+                      %{ for _, f in pairs(faces) do }%
+                      %{   for _, p in pairs(f) do }%
+                      %{=p}%
+                      %{   end }%
+                      %{=f[0]}% -1
+                      %{ end }%
+                     ]
+                  }
+               }
+	       Transform {
+	          rotation 0 1 0 %{= -math.pi / 2 }%
+		  children [
+                     Shape {
+                        appearance IS appearance
+                        geometry Cylinder {
+                           height IS thickness
+                           radius %{=inner_belt_radius + belt_space / 2}%
+                        }
+                     }
+		  ]
+	       }
+            ]
+         }
+      ]
+      name IS name
+      # model
+      # description
+      # contactMaterial
+      # immersionProperties
+      boundingObject USE ENCODER_DISK_SHAPE
+      physics IS physics
+      # locked
+      # radarCrossSection
+      # recognitionColors
+      # tranlationStep
+      # rotationStep
+   }
+}

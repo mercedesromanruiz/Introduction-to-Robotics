@@ -1,0 +1,54 @@
+#VRML_SIM R2022a utf8
+# tags: static
+
+PROTO Diode [
+ field SFNode     appearance      NULL
+ field SFFloat    radius          0.0015
+ field SFFloat    length          0.005
+]
+{
+   %{
+      local radius = fields.radius.value
+      local length = fields.length.value
+   }%
+   Group {
+      children [
+         Transform {
+            rotation 0 1 0 %{=-math.pi/2}%
+            children [
+               Shape {
+                  appearance IS appearance
+                  geometry Cylinder {
+                     height %{=length - radius}%
+                     radius IS radius
+                  }
+               }
+            ]
+         }
+         Transform {
+            translation %{=(length - radius) / 2}% 0 0
+            children [
+               Shape {
+                  appearance IS appearance
+                  geometry Sphere {
+                     radius IS radius
+                  }
+               }
+            ]
+         }
+         Transform {
+            translation %{=-(length - radius) / 2}% 0 0
+            rotation 0 1 0 %{=-math.pi/2}%
+            children [
+               Shape {
+                  appearance IS appearance
+                  geometry Cylinder {
+                     height %{=length / 10}%
+                     radius %{=radius * 1.1}%
+                  }
+               }
+            ]
+         }
+      ]
+   }
+}

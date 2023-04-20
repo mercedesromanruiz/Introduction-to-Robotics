@@ -1,0 +1,89 @@
+#VRML_SIM R2022a utf8
+# tags: static
+
+EXTERNPROTO "Diode.proto"
+
+PROTO Encoder [
+ field SFVec3f    translation      0 0 0
+ field SFRotation rotation         0 1 0 0
+ field SFVec3f    scale            1 1 1
+ field SFString   name             "encoder"
+
+ field SFNode     appearance       NULL
+ field SFNode     ledAppearance    NULL
+ field SFNode     physics          NULL
+
+ field SFString   sensorNamePrefix "led"
+ field SFFloat    ledRadius          0.0015
+ field SFFloat    ledLength          0.005
+
+ field SFFloat    distance         0.05
+ field SFFloat    innerBeltRadius  0.1
+ field SFFloat    outerBeltRadius  0.2
+ field SFInt32    numLED           1
+]
+{
+   %{
+      local sensor_name_prefix = fields.sensorNamePrefix.value
+      local distance           = fields.distance.value
+      local inner_belt_radius  = fields.innerBeltRadius.value
+      local outer_belt_radius  = fields.outerBeltRadius.value
+      local n_led              = fields.numLED.value
+
+      local led_loc = {}
+      for i = 0, n_led - 1 do
+        led_loc[i+1] = inner_belt_radius + (outer_belt_radius - inner_belt_radius) / n_led * (i + 0.5)
+      end
+   }%
+   Solid {
+      translation IS translation
+      rotation IS rotation
+      scale IS scale
+      children [
+         %{ for i = 0, (n_led - 1) do }%
+         Transform {
+            translation %{=distance / 2}% 0 %{=led_loc[i+1]}%
+            rotation 0 0 1 %{= math.pi }%
+            children [
+               Diode {
+                  appearance IS ledAppearance
+                  radius IS ledRadius
+                  length IS ledLength
+               }
+               DistanceSensor {
+                  lookupTable [
+                   0 1 0,
+                   %{=distance * 2 / 3}% 1 0
+                   %{=distance}% 0 0
+                  ]
+                  type "sonar"
+                  name %{='"'..sensor_name_prefix..i..'"'}%
+               }
+            ]
+         }
+         Transform {
+            translation %{=-distance / 2}% 0 %{=led_loc[i+1]}%
+            children [
+               Diode {
+                  appearance IS ledAppearance
+                  radius IS ledRadius
+                  length IS ledLength
+               }
+            ]
+         }
+         %{ end }%
+      ]
+      name IS name
+      # model
+      # description
+      # contactMaterial
+      # immersionProperties
+      # boundingObject IS boundingObject
+      physics IS physics
+      # locked
+      # radarCrossSection
+      # recognitionColors
+      # tranlationStep
+      # rotationStep
+   }
+}
