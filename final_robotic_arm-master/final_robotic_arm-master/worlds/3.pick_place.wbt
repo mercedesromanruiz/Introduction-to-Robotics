@@ -1,0 +1,104 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/universal_robots/protos/UR10e.proto"
+
+WorldInfo {
+  CFM 1e-08
+  ERP 0.8
+  basicTimeStep 50
+}
+Viewpoint {
+  orientation -0.1801737641433821 0.9103272793165921 0.37261462564754 0.9765598743697298
+  position -4.0608371488002195 -1.9944914428991476 5.904242626667472
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+DirectionalLight {
+}
+DEF FLOOR Group {
+  children [
+    Floor {
+      size 3 3
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 0
+        }
+      }
+    }
+    Transform {
+      translation 0 -0.35 0.0001
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.3 0 0
+            }
+          }
+          geometry Plane {
+            size 0.15 0.15
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 -0.5 0.0001
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0.3 0
+            }
+          }
+          geometry Plane {
+            size 0.15 0.15
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 -0.65 0.0001
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 0.3
+            }
+          }
+          geometry Plane {
+            size 0.15 0.15
+          }
+        }
+      ]
+    }
+  ]
+}
+UR10e {
+  controller "final"
+  controllerArgs [
+    "2"
+  ]
+  supervisor TRUE
+  selfCollision FALSE
+  toolSlot [
+    Camera {
+      rotation 0 0 1 1.57079632679
+      fieldOfView 1.5708
+      width 200
+      height 200
+      recognition Recognition {
+      }
+    }
+    Connector {
+      rotation 0 0 1 1.5708
+      model "EM"
+      type "active"
+      numberOfRotations 0
+    }
+  ]
+}

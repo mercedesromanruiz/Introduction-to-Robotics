@@ -1,0 +1,83 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/universal_robots/protos/UR10e.proto"
+
+WorldInfo {
+  CFM 1e-08
+  ERP 0.8
+  basicTimeStep 50
+}
+Viewpoint {
+  orientation -0.25257744216311806 0.7740937827804869 0.580502757246624 1.0241490719626163
+  position -3.775475253479121 -3.125119721735488 5.638918841360157
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DirectionalLight {
+}
+UR10e {
+  controller "final"
+  controllerArgs [
+    "0"
+  ]
+  supervisor TRUE
+  selfCollision FALSE
+  toolSlot [
+    Camera {
+      rotation 0 0 1 1.57079632679
+      fieldOfView 1.5708
+      width 200
+      height 200
+      recognition Recognition {
+      }
+    }
+    Connector {
+      rotation 0 0 1 1.5708
+      model "EM"
+      type "active"
+      numberOfRotations 0
+    }
+  ]
+}
+DEF DEST Transform {
+  children [
+    Transform {
+      translation 0.1 0 0
+      children [
+        Shape {
+          appearance DEF TARGET_APPEARANCE Appearance {
+            material Material {
+              diffuseColor 1 0 0
+              transparency 0.1
+            }
+          }
+          geometry Box {
+            size 0.2 0.05 0.05
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0.3 0 0
+      rotation -0.5773506616397417 0.5773500729644677 -0.5773500729644677 2.0943945137181217
+      children [
+        Shape {
+          appearance DEF TARGET_APPEARANCE Appearance {
+            material Material {
+              diffuseColor 1 0 0
+              transparency 0.1
+            }
+          }
+          geometry Cone {
+            bottomRadius 0.09
+            height 0.2
+          }
+        }
+      ]
+    }
+  ]
+}
