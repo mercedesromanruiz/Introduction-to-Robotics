@@ -1,0 +1,53 @@
+#VRML_SIM R2023a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/robots/irobot/create/protos/Create.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+
+WorldInfo {
+  basicTimeStep 50
+  defaultDamping Damping {
+  }
+}
+Viewpoint {
+  orientation 0.37613270106073177 -0.3335046025505236 -0.8644644997166603 4.44953116549366
+  position 3.5392711418900658 -16.523837252909804 17.35339124702731
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  appearance Parquetry {
+    type "light strip"
+  }
+}
+DEF SUPERVISOR Robot {
+  locked TRUE
+  controller "supervisor"
+  controllerArgs [
+    "1"
+  ]
+  supervisor TRUE
+}
+DEF ROBOT Create {
+  translation 3.5 0 0.044
+  rotation 0 0 1 1.5708
+  controller "final"
+  controllerArgs [
+    "3"
+  ]
+  customData "-5 5 -5 5 20 -5 -5 10.080427218107992 -5 5 8.678185830160961 5 -5 7.070754108168898 5 5 4.220499057815117 -1.924074838434282 1.2791343647455946 4.8158129113934915 -2.637485032552612 2.7694400234915797 5.514993797210911 0.939663858017779 -1.002553087517799 3.0622796507331085 2.935460848124368 -1.9274622007880526 3.5771711054023942 2.102540767240651 0.6207679925781697 0.9840941982692621 -2.251594340907286 -0.8576107880405415 5.455175475330519 -2.919989251136481 -4.068682404900734 8.214304135847005 4.856259787139148 2.5597065232367777 2.3730453189207097 -2.2111586445540645 -2.476681492766887 6.057342844226578 0.12210292299969794 0.6939262668145716 2.5681129570463637 -3.3075593727661268 -1.2399143594319306 6.395897831647841 4.258153899647626 4.857981005488346 3.7144715462423115 0.8276440422659554 4.921806642332571 3.5732569061111716 -1.641300763601008 -3.616222872861752 6.386778253980744 -0.6026411680938963 -1.3113087463349382 3.8647279138549173 2.4129032132900345 0.6256442458000508 0.8373696292808517 4 1.6 1.6 0.2 1.6 -1.6 0.4 -1.6 1.6 0.4 -1.6 -1.6 0.2"
+  bodySlot [
+    GPS {
+    }
+    InertialUnit {
+    }
+  ]
+}
+DEF LANDMARK Group {
+}
+DEF OBSTACLE Group {
+}
