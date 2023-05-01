@@ -39,10 +39,10 @@ def trans_dh(dh):
     cal = math.cos(al)
     sal = math.sin(al)
 
-    return np.array([[__, __, __, __],
-                     [__, __, __, __],
-                     [__, __, __, __],
-                     [__, __, __, __]])
+    return np.array([[ct, -st * cal, st * sal, r * ct],
+                     [st, ct * cal, -ct * sal, r * st],
+                     [0, sal, cal, d],
+                     [0, 0, 0, 1]])
 
 # 1.2. Transformation matrix for rotation about z-axis
 #      Fill out the underscore parts.
@@ -53,10 +53,10 @@ def trans_rot_z(th):
     ct = math.cos(th)
     st = math.sin(th)
 
-    return np.array([[__, __, __, __],
-                     [__, __, __, __],
-                     [__, __, __, __],
-                     [__, __, __, __]])
+    return np.array([[ct, -st, 0, 0],
+                     [st, ct, 0, 0],
+                     [0, 0, 1, 0],
+                     [0, 0, 0, 1]])
 
 # 1.3. DH parameters of UR10e
 #      Fill out the underscore parts.
@@ -64,12 +64,12 @@ def trans_rot_z(th):
 #      Make sure that you're using the UR10e parameters
 #
 #           [d, theta, r(a), alpha]
-dh_param = [[__, __, __, __],
-            [__, __, __, __],
-            [__, __, __, __],
-            [__, __, __, __],
-            [__, __, __, __],
-            [__, __, __, __]]
+dh_param = [[0.1807, 0, 0, math.pi/2],
+            [0, 0, -0.6127, 0],
+            [0, 0, -0.57155, 0],
+            [0.17415, 0, 0, math.pi/2],
+            [0.11985, 0, 0, -math.pi/2],
+            [0.11655, 0, 0, 0]]
 
 # 1.4. Forward kinematics
 #      Given joint angles q[0] to q[5], calculate the transformation matrix of the end-effector frame.
@@ -84,8 +84,8 @@ def fwd_kin(q):
                   [ 0, 0, 0, 1]])
 
     for i in range(6):
-        rot_z = _________________     # rotation about z axis by q[i]. You created it above.
-        dh    = _____________________ # dh-transformation     for dh_param[i]. You created it above.
+        rot_z = trans_rot_z(i)     # rotation about z axis by q[i]. You created it above.
+        dh    = trans_dh(dh_param[i]) # dh-transformation     for dh_param[i]. You created it above.
         M = M @ rot_z @ dh
 
     return M
