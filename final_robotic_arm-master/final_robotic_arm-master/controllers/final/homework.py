@@ -84,7 +84,7 @@ def fwd_kin(q):
                   [ 0, 0, 0, 1]])
 
     for i in range(6):
-        rot_z = trans_rot_z(i)     # rotation about z axis by q[i]. You created it above.
+        rot_z = trans_rot_z(q[i])     # rotation about z axis by q[i]. You created it above.
         dh    = trans_dh(dh_param[i]) # dh-transformation     for dh_param[i]. You created it above.
         M = M @ rot_z @ dh
 
