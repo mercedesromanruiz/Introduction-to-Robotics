@@ -111,7 +111,7 @@ def fwd_kin(q):
 def inv_kin(q0, loc):
     def objective(q): # objective function to minimize
         M = fwd_kin(q)
-        e = np.linalg.norm(M[_____] - loc)
+        e = np.linalg.norm(M[0:3, 3] - loc)
         return e
 
     return scipy.optimize.minimize(objective, q0).x
@@ -134,8 +134,8 @@ def inv_kin_z(th, loc, z_axis):
         M = fwd_kin(q)
 
         #error
-        e_loc = np.linalg.norm(M[_____] - loc)
-        e_z   = np.linalg.norm(M[_____] - z_axis)
+        e_loc = np.linalg.norm(M[0:3, 3] - loc)
+        e_z   = np.linalg.norm(M[0:3, 2] - z_axis)
 
         #error weight
         w_loc = 10
@@ -156,9 +156,9 @@ def inv_kin_zx(th, loc, z_axis, x_axis):
         M = fwd_kin(q)
 
         #error
-        e_loc = np.linalg.norm(M[_____] - loc)
-        e_z   = np.linalg.norm(M[_____] - z_axis)
-        e_x   = np.linalg.norm(M[_____] - x_axis)
+        e_loc = np.linalg.norm(M[0:3, 3] - loc)
+        e_z   = np.linalg.norm(M[0:3, 2] - z_axis)
+        e_x   = np.linalg.norm(M[0:3, 0] - x_axis)
 
         #error weight
         w_loc = 10
