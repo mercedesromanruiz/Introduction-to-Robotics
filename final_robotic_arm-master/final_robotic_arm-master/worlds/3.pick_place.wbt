@@ -12,7 +12,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.1801737641433821 0.9103272793165921 0.37261462564754 0.9765598743697298
-  position -4.0608371488002195 -1.9944914428991476 5.904242626667472
+  position -3.9759474537528194 -1.9595174333842889 5.788354913912103
 }
 TexturedBackground {
 }
@@ -79,6 +79,18 @@ DEF FLOOR Group {
   ]
 }
 UR10e {
+  hidden position_0_0 -0.3557569364653368
+  hidden rotation_1 0 0 -1 0.3557569364653364
+  hidden position_1_0 -1.8396520103366791
+  hidden rotation_2 0 -1 0 0.26885601033667844
+  hidden position_2_0 2.3018020249517366
+  hidden rotation_3 0 0.9999999999999999 0 2.3018020249517366
+  hidden position_3_0 -2.0329462919640875
+  hidden rotation_4 0 -1 0 0.4621502919640879
+  hidden position_4_0 -1.5707963312166875
+  hidden rotation_5 0 0 -1 1.5707963312166875
+  hidden position_5_0 -0.35575694007613556
+  hidden rotation_6 0 -1 0 0.3557569400761361
   controller "final"
   controllerArgs [
     "2"
@@ -100,5 +112,334 @@ UR10e {
       type "active"
       numberOfRotations 0
     }
+  ]
+}
+Solid {
+  translation 0.5912484610596652 0.154291680813613 0.0009732212911717041
+  rotation 1.3283786686119656e-14 0.9999862353225232 -0.005246824324030852 4.639472138226144e-16
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    1 0 0
+  ]
+}
+Solid {
+  translation 0.6397646302453088 -0.26480652944846617 0.0009732212911716937
+  rotation 0.4051198303702089 0.913749343107391 -0.030660414407256184 1.3336796805589281e-15
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 1
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation 0.5046133734020619 -0.27447330858662 0.0009732212911716933
+  rotation -0.8843996959699235 -0.46202135778393966 -0.06613200979700952 9.163844499579187e-16
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 1 0
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    0 1 0
+  ]
+}
+Solid {
+  translation 0.7527966517811947 -0.07396668699564019 0.0009732212911717107
+  rotation 0.5182710008583118 0.8544813551860646 -0.03545113973781618 7.818787155678471e-16
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 1
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  name "solid(3)"
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation 0.3545785532799893 0.345349392791944 0.0009732212911716933
+  rotation -0.8843996959699235 -0.46202135778393966 -0.06613200979700952 9.163844499579187e-16
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  name "solid(4)"
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    1 0 0
+  ]
+}
+Solid {
+  translation 0.5865664203740821 0.3018230426094445 0.0009732212911716933
+  rotation -0.8843996959699235 -0.46202135778393966 -0.06613200979700952 9.163844499579187e-16
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 1
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  name "solid(5)"
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    0 0 1
+  ]
+}
+Solid {
+  translation 0.7273617791057871 -0.16045692787133875 0.0009732212911717041
+  rotation 1.3283786686119656e-14 0.9999862353225232 -0.005246824324030852 4.639472138226144e-16
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  name "solid(6)"
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    1 0 0
+  ]
+}
+Solid {
+  translation 0.566083332939119 -0.3242097470770663 0.0009732212911716933
+  rotation -0.8843996959699235 -0.46202135778393966 -0.06613200979700952 9.163844499579187e-16
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  name "solid(7)"
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    1 0 0
+  ]
+}
+Solid {
+  translation 0.46649243256156425 0.05040499221577577 0.0009732212911717075
+  rotation -0.5738980345592256 0.7964506443324789 -0.19054505260288618 2.3536414720922625e-16
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 1 0
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  name "solid(8)"
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    0 1 0
+  ]
+}
+Solid {
+  translation 0.31975128123779994 -0.20594266025591185 0.0009732212911717041
+  rotation 1.3283786686119656e-14 0.9999862353225232 -0.005246824324030852 4.639472138226144e-16
+  children [
+    DEF SHAPE Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 1 0
+        }
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.02
+      }
+    }
+    Connector {
+      translation 0 0 0.001
+      rotation 0 1 0 -1.5708
+      model "EM"
+      type "passive"
+      numberOfRotations 0
+    }
+  ]
+  name "solid(9)"
+  boundingObject USE SHAPE
+  physics Physics {
+    density -1
+    mass 0.005
+  }
+  recognitionColors [
+    0 1 0
   ]
 }
