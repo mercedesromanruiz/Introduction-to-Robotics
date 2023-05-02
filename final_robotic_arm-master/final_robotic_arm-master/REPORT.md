@@ -109,5 +109,6 @@ def inv_kin_zx(th, loc, z_axis, x_axis):
 #### 3.3. Move EE close to the object to pick
 #### 3.4. Move EE to somewhere above the object location
 #### 3.5. Move EE to somewhere above the dropzone
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 ```
 ```
