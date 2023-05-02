@@ -286,7 +286,7 @@ def control(get_joint_angles, set_joint_angles,
             loc = [gx, gy, 0.05]
             z_axis = [0, 0, -1] # Do we need it?
             x_axis = [1, 0, 0]  # Do we need it?
-            q = inv_kin___(get_joint_angles(), loc, ______)
+            q = inv_kin_zx(get_joint_angles(), loc, z_axis, x_axis)
             set_joint_angles(q)
             sleep_for(1)
 
