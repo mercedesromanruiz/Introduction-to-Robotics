@@ -275,8 +275,8 @@ def control(get_joint_angles, set_joint_angles,
             #         If iy is 0,            gx is 0.9.  (0.5 + 0.4)
             #         If iy is image_height, gx is 0.1.  (0.5 - 0.4)
             #
-            gx = - (iy - 0.5 * image_height) + 0.5
-            gy = - (ix - 0.5 * image_width)
+            gx = - 0.8 / image_height * iy + 0.9
+            gy = - 0.8 / image_width * ix + 0.4
 
             # 3.2. Move EE to somewhere above the object location, like 0.05m above
             #      Do we need to move only EE (inv_kin)?
