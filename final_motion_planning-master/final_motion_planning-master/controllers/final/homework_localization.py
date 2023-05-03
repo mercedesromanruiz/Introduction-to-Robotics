@@ -98,17 +98,17 @@ def predict(particle, u, dt):
     wr = u[1]
 
     # 4.1. Calculate the linear velocities of the left and right wheels.
-    vl = _________________
-    vr = _________________
+    vl = wl * 2 * math.pi * WHEEL_RADIUS
+    vr = wr * 2 * math.pi * WHEEL_RADIUS
 
     # 4.2. Calculate the linear and angular velocities of the robot
-    v = _____________
-    w = _______________________
+    v = math.sqrt(vl**2 + vr**2)
+    w = math.sqrt(wl**2 + wr**2)
 
     # 4.3. Calculate the robot's location & orientation
-    th = prev_th + ______
-    x  = prev_x  + _____________________
-    y  = prev_y  + _____________________
+    th = prev_th + (wl - wr) * dt
+    x  = prev_x  + vl * dt * math.sin(th)
+    y  = prev_y  + vl * dt * math.cos(th)
 
     # Add gaussian noise
     th += random.gauss(0, sigma_th)
