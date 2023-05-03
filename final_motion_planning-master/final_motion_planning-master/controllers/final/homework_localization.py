@@ -52,7 +52,7 @@ def log_likelihood_joint(estimate, landmark):
 
         # 2.1. Calculate the expected distance to the landmark (l_x, l_y) from (x, y, th)
         #      Fill out the underscore parts.
-        expected = ______________________________________
+        expected = math.sqrt((l_x - x)**2 + (l_y - y)**2)
 
         # 2.2. Accumulate log-likelihood
         #      Fill out the underscore parts.
