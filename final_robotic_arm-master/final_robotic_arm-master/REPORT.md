@@ -53,8 +53,6 @@ def fwd_kin(q):
 
     return M
 ```
-![Figure 1. Foward Kinematics](../Captura%20de%20pantalla%20(30).png)
-
 ### 2. Inverse Kinematics
 #### 2.1. Inverse kinematics that moves EE_loc to 'loc'
 ```
