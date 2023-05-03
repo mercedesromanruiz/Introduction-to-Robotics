@@ -28,7 +28,7 @@ def log_likelihood_single(expected, observed):
     #    Fill out the underscore parts.
     #    Assume that observation error is known to follow N(0, sigma^2)
     #    See https://en.wikipedia.org/wiki/Normal_distribution#Operations_on_a_single_normal_variable for the equation.
-    return _________________________________________________________________________
+    return 1 / (sigma * math.sqrt(2 * math.pi)) * math.exp(-1/2 * ((mu - x) / sigma)**2)
 
 # 2. Calculate the log-likelihood of the given estimate and observations
 #    estimate: [x, y, th]
@@ -52,11 +52,11 @@ def log_likelihood_joint(estimate, landmark):
 
         # 2.1. Calculate the expected distance to the landmark (l_x, l_y) from (x, y, th)
         #      Fill out the underscore parts.
-        expected = ______________________________________
+        expected = np.linalg.norm([l_x - x, l_y - y])
 
         # 2.2. Accumulate log-likelihood
         #      Fill out the underscore parts.
-        llh = llh _ log_likelihood_single(expected, observed)
+        llh = llh + log_likelihood_single(expected, observed)
 
     return llh
 
