@@ -28,8 +28,8 @@ def log_likelihood_single(expected, observed):
     #    Fill out the underscore parts.
     #    Assume that observation error is known to follow N(0, sigma^2)
     #    See https://en.wikipedia.org/wiki/Normal_distribution#Operations_on_a_single_normal_variable for the equation.
-    return 1 / (sigma * math.sqrt(2 * math.pi)) * math.exp(-1/2 * ((mu - x) / sigma)**2)
-
+    return math.log(1 / (sigma * math.sqrt(2 * math.pi))) - 1/2 * ((mu - x) / sigma)**2
+    
 # 2. Calculate the log-likelihood of the given estimate and observations
 #    estimate: [x, y, th]
 #    landmark: [[l_x1, l_y1, observed_distance1],
@@ -98,17 +98,17 @@ def predict(particle, u, dt):
     wr = u[1]
 
     # 4.1. Calculate the linear velocities of the left and right wheels.
-    vl = _________________
-    vr = _________________
+    vl = wl * 2 * math.pi * WHEEL_RADIUS
+    vr = wr * 2 * math.pi * WHEEL_RADIUS
 
     # 4.2. Calculate the linear and angular velocities of the robot
-    v = _____________
-    w = _______________________
+    v = (vl + vr) / 2
+    w = (vr - vl) / AXLE_LENGHT
 
     # 4.3. Calculate the robot's location & orientation
-    th = prev_th + ______
-    x  = prev_x  + _____________________
-    y  = prev_y  + _____________________
+    th = prev_th + w * dt
+    x  = prev_x  + v * math.cos(th) * dt
+    y  = prev_y  + v * math.sin(th) * dt
 
     # Add gaussian noise
     th += random.gauss(0, sigma_th)
