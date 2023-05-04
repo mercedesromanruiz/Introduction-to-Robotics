@@ -28,7 +28,7 @@ def log_likelihood_single(expected, observed):
     #    Fill out the underscore parts.
     #    Assume that observation error is known to follow N(0, sigma^2)
     #    See https://en.wikipedia.org/wiki/Normal_distribution#Operations_on_a_single_normal_variable for the equation.
-    return math.log(1 / (sigma * math.sqrt(2 * math.pi))) - 1/2 * ((mu - x) / sigma)**2
+    return math.log(1 / (sigma * math.sqrt(2 * math.pi))) - (-1/2 * (((mu - x) / sigma)**(2)))
     
 # 2. Calculate the log-likelihood of the given estimate and observations
 #    estimate: [x, y, th]
