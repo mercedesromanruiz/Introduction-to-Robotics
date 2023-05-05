@@ -82,7 +82,7 @@ AXLE_LENGTH = 0.271756
 sigma_x = 0.01
 sigma_y = 0.01
 sigma_th = 0.01
-N_PARTICLE = 999
+N_PARTICLE = 1000
 
 
 # 4. Predict
@@ -98,8 +98,8 @@ def predict(particle, u, dt):
     wr = u[1]
 
     # 4.1. Calculate the linear velocities of the left and right wheels.
-    vl = wl * 2 * math.pi * WHEEL_RADIUS
-    vr = wr * 2 * math.pi * WHEEL_RADIUS
+    vl = wl * WHEEL_RADIUS
+    vr = wr * WHEEL_RADIUS
 
     # 4.2. Calculate the linear and angular velocities of the robot
     v = (vl + vr) / 2
