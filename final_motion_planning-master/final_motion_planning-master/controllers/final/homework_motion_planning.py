@@ -27,14 +27,14 @@ ROBOT_RADIUS = 0.3
 #         it means that the wheels slip too much due to high speed.
 
 # Artificial potential field parameters
-K_att = 1            # attractive force gain
+K_att = 5            # attractive force gain
 dist_effective_g = 1 # attractive force: dist2goal == dist_effective_g if dist2goal > dist_effective_g
 K_rep = 1            # repulsive force gain
 dist_effective_o = 1 # repulsive force is 0 if dist to obstacle is >dist_effective_o
 
 # Tracker parameters
-K_lin = 1            # linear velocity gain
-K_ang = 1            # angular velocity gain
+K_lin = 2            # linear velocity gain
+K_ang = 2            # angular velocity gain
 
 
 # Calculate attractive force
