@@ -79,10 +79,10 @@ AXLE_LENGTH = 0.271756
 
 # These are values that don't work well.
 # Complete the following code & try different values to get a better result
-sigma_x = 0.1
-sigma_y = 0.1
-sigma_th = 0.1
-N_PARTICLE = 100
+sigma_x = 0.01
+sigma_y = 0.01
+sigma_th = 0.01
+N_PARTICLE = 999
 
 
 # 4. Predict
@@ -107,8 +107,8 @@ def predict(particle, u, dt):
 
     # 4.3. Calculate the robot's location & orientation
     th = prev_th + w * dt
-    x  = prev_x  + v * math.cos(th) * dt
-    y  = prev_y  + v * math.sin(th) * dt
+    x  = prev_x  + v * math.cos(prev_th) * dt
+    y  = prev_y  + v * math.sin(prev_th) * dt
 
     # Add gaussian noise
     th += random.gauss(0, sigma_th)
