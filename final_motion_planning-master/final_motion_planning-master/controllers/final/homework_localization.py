@@ -79,10 +79,10 @@ AXLE_LENGTH = 0.271756
 
 # These are values that don't work well.
 # Complete the following code & try different values to get a better result
-sigma_x = 1
-sigma_y = 1
-sigma_th = 1
-N_PARTICLE = 10
+sigma_x = 0.1
+sigma_y = 0.1
+sigma_th = 0.1
+N_PARTICLE = 100
 
 
 # 4. Predict
@@ -103,7 +103,7 @@ def predict(particle, u, dt):
 
     # 4.2. Calculate the linear and angular velocities of the robot
     v = (vl + vr) / 2
-    w = (vr - vl) / AXLE_LENGHT
+    w = (vr - vl) / AXLE_LENGTH
 
     # 4.3. Calculate the robot's location & orientation
     th = prev_th + w * dt
