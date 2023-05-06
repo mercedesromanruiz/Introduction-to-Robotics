@@ -82,7 +82,7 @@ AXLE_LENGTH = 0.271756
 sigma_x = 0.01
 sigma_y = 0.01
 sigma_th = 0.01
-N_PARTICLE = 1000
+N_PARTICLE = 100
 
 
 # 4. Predict
